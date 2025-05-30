@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Laravel App')</title>
 
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <link href="styles/flowbite.min.css" rel="stylesheet" />
     <script src="styles/flowbite.min.js"></script>
 </head>
