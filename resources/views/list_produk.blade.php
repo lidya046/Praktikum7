@@ -20,18 +20,31 @@
                         <th class="py-3 px-4 border-b">Nama Produk</th>
                         <th class="py-3 px-4 border-b">Deskripsi Produk</th>
                         <th class="py-3 px-4 border-b">Harga Produk</th>
+                        <th class="py-3 px-4 border-b">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($nama as $index => $item)
-                    <tr class="hover:bg-blue-50">
-                        <td class="py-2 px-4 border-b">{{ $index + 1 }}</td>
-                        <td class="py-2 px-4 border-b">{{ $item }}</td>
-                        <td class="py-2 px-4 border-b">{{ $desc[$index] }}</td>
-                        <td class="py-2 px-4 border-b">Rp {{ number_format($harga[$index], 0, ',', '.') }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
+    @foreach ($produk as $index => $item)
+    <tr class="hover:bg-blue-50">
+        <td class="py-2 px-4 border-b">{{ $index + 1 }}</td>
+        <td class="py-2 px-4 border-b">{{ $item->nama }}</td>
+        <td class="py-2 px-4 border-b">{{ $item->deskripsi }}</td>
+        <td class="py-2 px-4 border-b">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
+        <td class="py-2 px-4 border-b flex gap-3">
+            <!-- Tombol Edit -->
+            <a href="{{ route('produk.edit', $item->id) }}" class="text-blue-500 hover:underline">Edit</a>
+
+            <!-- Tombol Hapus -->
+            <form action="{{ route('produk.delete', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus {{ $item->nama }}?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-500 hover:underline">Hapus</button>
+            </form>
+        </td>
+    </tr>
+    @endforeach
+</tbody>
+
             </table>
         </div>
 
